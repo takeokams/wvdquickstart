@@ -215,7 +215,7 @@ stages:
                     $parameterFilePath = '$(Pipeline.Workspace)/parameters/wvdhostpool.parameters.json'
                     $functionInput = @{
                       resourcegroupName             = "$(resourceGroupName)"
-                      location                      = "$(location)"
+                      location                      = "westus2"
                       moduleName                    = "WvdHostPools"
                       moduleVersion                 = "0.0.1"
                       parameterFilePath             = $parameterFilePath
