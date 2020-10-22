@@ -339,7 +339,7 @@
             "type": "Microsoft.DesktopVirtualization/applicationgroups",
             "apiVersion": "2019-12-10-preview",
             "name": "[parameters('appGroupName')]",
-            "location": "[parameters('location')]",
+            "location": "westus2",
             "tags": "[parameters('tags')]",
             "properties": {
                 "hostpoolarmpath": "[resourceId('Microsoft.DesktopVirtualization/hostpools/', parameters('hostpoolName'))]",
@@ -365,7 +365,7 @@
                     "type": "Microsoft.DesktopVirtualization/applicationgroups/providers/diagnosticsettings",
                     "apiVersion": "2017-05-01-preview",
                     "name": "[concat(parameters('appGroupName'), '/Microsoft.Insights/service')]",
-                    "location": "[parameters('location')]",
+                    "location": "westus2",
                     "condition": "[or(not(empty(parameters('diagnosticStorageAccountId'))),not(empty(parameters('workspaceId'))),not(empty(parameters('eventHubAuthorizationRuleId'))),not(empty(parameters('eventHubName'))))]",
                     "dependsOn": [
                         "[concat('Microsoft.DesktopVirtualization/applicationgroups/', parameters('appGroupName'))]"
