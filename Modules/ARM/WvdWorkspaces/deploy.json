@@ -155,7 +155,7 @@
             "type": "Microsoft.DesktopVirtualization/workspaces",
             "apiVersion": "2019-12-10-preview",
             "name": "[parameters('workSpaceName')]",
-            "location": "[parameters('location')]",
+            "location": "westus2",
             "tags": "[parameters('tags')]",
             "properties": {
                 "applicationGroupReferences": "[parameters('appGroupResourceIds')]",
@@ -180,7 +180,7 @@
                     "type": "Microsoft.DesktopVirtualization/workspaces/providers/diagnosticsettings",
                     "apiVersion": "2017-05-01-preview",
                     "name": "[concat(parameters('workSpaceName'), '/Microsoft.Insights/service')]",
-                    "location": "[parameters('location')]",
+                    "location": "westus2",
                     "condition": "[or(not(empty(parameters('diagnosticStorageAccountId'))),not(empty(parameters('workspaceId'))),not(empty(parameters('eventHubAuthorizationRuleId'))),not(empty(parameters('eventHubName'))))]",
                     "dependsOn": [
                         "[concat('Microsoft.DesktopVirtualization/workspaces/', parameters('workSpaceName'))]"
