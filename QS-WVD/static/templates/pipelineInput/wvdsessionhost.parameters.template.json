@@ -5,6 +5,9 @@
         "vmNamePrefix": {
             "value": "[vmNamePrefix]"
         },
+        "bootDiagnosticStorageAccountName": {
+        "value": "[wvdAssetsStorage]"
+        },
         "vmNumberOfInstances": {
             "value": 2
         },
@@ -71,7 +74,7 @@
                 "settings": {
                     "wmfVersion": "latest",
                     "configuration": {
-                        "url": "https://github.com/takeokams/wvdquickstart/raw/master/Uploads/Configuration.zip",
+                        "url": "https://github.com/monkeytreehosting/wvdquickstart/raw/master/Uploads/Configuration.zip",
                         "script": "Configuration.ps1",
                         "function": "AddSessionHost"
                     },
