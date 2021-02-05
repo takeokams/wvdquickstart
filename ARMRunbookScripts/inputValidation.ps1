@@ -118,14 +118,14 @@ Catch {
 #region connect to Azure and check if admin on Azure AD 
 Try {
 	# this depends on the previous segment completeing 
-	$role = Get-AzureADDirectoryRole | Where-Object {$_.displayName -eq 'Company Administrator'}
+	$role = Get-AzureADDirectoryRole | Where-Object {$_.displayName -eq 'Global Administrator'}
 	$isMember = Get-AzureADDirectoryRoleMember -ObjectId $role.ObjectId | Get-AzureADUser | Where-Object {$_.UserPrincipalName -eq $AADUsername}
 	
 	if ($isMember.UserType -eq "Member") {
 		Write-Output $($AADUsername + " has " + $role.DisplayName + " role assigned")        
 	} 
 	else {
-		Write-Output "Missing Owner role."   
+		Write-Output "Missing Global Administrator role."   
 		Throw
 	}
 }
