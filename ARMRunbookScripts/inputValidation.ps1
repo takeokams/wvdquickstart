@@ -197,18 +197,6 @@ else {
     Throw
 }
 
-$safeUrls = "169.254.169.254", "168.63.129.16"
-foreach($url in $safeUrls) {
-    $var = test-netconnection $url -port 80
-    if ($var.TcpTestSucceeded) {
-    		Write-Output "$url is reachable."
-	}
-	else {
-    		Write-Output "$url cannot be reached."   
-   		Throw
-	} 
-}
-
 
 Write-Output ('End verification.')
 #endregion
