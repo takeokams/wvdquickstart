@@ -1,9 +1,10 @@
 {
-    "fslogix": [
+    "onedrive": [
         {
-            "installFSLogix": true,
-            "configureFSLogix": true,
+            "installOneDrive": true,
+            "configureOneDrive": true,
             "profileContainerKeys": [
+                # to be edited for OneDrive RegEdits
                 {
                     "Name": "Enabled",
                     "Type": "DWORD",
@@ -15,7 +16,6 @@
                     "Value": "\\\\[profilesStorageAccountName].file.core.windows.net\\[profilesShareName]"
                 }
             ],
-            "NTFSPermission": true,
             "fileShareName": "[profilesShareName]",
             "fileShareStorageAccountName": "[profilesStorageAccountName]",
             "domain": "[domainName]",
