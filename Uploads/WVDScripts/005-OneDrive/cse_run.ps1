@@ -19,7 +19,7 @@ param (
     [Parameter(Mandatory = $false)]
     [ValidateNotNullOrEmpty()]
     #[string] $ConfigurationFilePath = (Join-Path $PSScriptRoot "fslogix.parameters.json")
-    [string] $ConfigurationFileName = "fslogix.parameters.json"
+    [string] $ConfigurationFileName = "onedrive.parameters.json"
 )
 
 #####################################
@@ -135,7 +135,7 @@ $ConfigurationFilePath= Join-Path $PSScriptRoot $ConfigurationFileName
 
 $ConfigurationJson = Get-Content -Path $ConfigurationFilePath -Raw -ErrorAction 'Stop'
 
-try { $FSLogixConfig = $ConfigurationJson | ConvertFrom-Json -ErrorAction 'Stop' }
+try { $OneDriveConfig = $ConfigurationJson | ConvertFrom-Json -ErrorAction 'Stop' }
 catch {
     Write-Error "Configuration JSON content could not be converted to a PowerShell object" -ErrorAction 'Stop'
 }
@@ -143,24 +143,23 @@ catch {
 LogInfo("##################")
 LogInfo("## 1 - EVALUATE ##")
 LogInfo("##################")
-foreach ($config in $FSLogixConfig.fslogix) {
+foreach ($config in $OneDriveConfig.fslogix) {
 
     if ($config.installFSLogix) {
         LogInfo("########################")
-        LogInfo("## 2 - INSTALL FLOGIX ##")
+        LogInfo("## 2 - INSTALL OneDrive ##")
         LogInfo("########################")
-        LogInfo("Trigger FSLogix")
+        LogInfo("Trigger OneDrive")
 
-        # & "$PSScriptRoot\Install-FSLogix.ps1"
         if ($PSCmdlet.ShouldProcess("FSLogix", "Install")) {
-            & "$PSScriptRoot\Install-FSLogix.ps1"
-            LogInfo("FSLogix installed")
+            & "$PSScriptRoot\Install-OneDrive.ps1"
+            LogInfo("OneDrive installed")
         }
     }
 
-    if ($config.configureFSLogix) {
+    if ($config.configureOneDrive) {
         LogInfo("###########################")
-        LogInfo("## 3 - CONFIGURE FSLOGIX ##")
+        LogInfo("## 3 - CONFIGURE OneDrive ##")
         LogInfo("###########################")
         foreach ($key in $config.profileContainerKeys) {
             LogInfo($key.Name)
@@ -171,38 +170,9 @@ foreach ($config in $FSLogixConfig.fslogix) {
         $($config.profileContainerKeys).GetType() | Format-Table
         Write-Verbose "Before function count: $($testArr.Count)"
 
-        # & "$PSScriptRoot\Configure-FSLogix.ps1" $config.profileContainerKeys
         if ($PSCmdlet.ShouldProcess("FSLogix", "Set")) {
-            & "$PSScriptRoot\Set-FSLogix.ps1" $config.profileContainerKeys
-            LogInfo("FSLogix configured")
-        }
-    }
-
-    if ($config.NTFSPermission) {
-        LogInfo("######################################################")
-        LogInfo("## 4 - Set NTFS Permission on the share for FSLogix ##")
-        LogInfo("######################################################")
-        LogInfo($config.fileShareName)
-        LogInfo($config.fileShareStorageAccountName)
-        LogInfo($config.domain)
-        LogInfo($config.targetGroup)
-
-        $fileShareUri = "\\{0}.file.core.windows.net\{1}" -f $config.fileShareStorageAccountName, $config.fileShareName
-        $storageAccountKey = ConvertTo-SecureString -String $DynParameters.storageaccountkey -AsPlainText -Force
-        
-        $fileShareInputObject = @{
-            storageAccountName = $config.fileShareStorageAccountName
-            fileShareUri       = $fileShareUri
-            storageAccountKey  = $storageAccountKey
-            domain             = $config.domain
-            targetGroup        = $config.targetGroup
-        }
-        $fileShareInputObject.Keys | ForEach-Object { LogInfo("Drive: Use param: '{0}' with value '{1}'" -f $_, $fileShareInputObject[$_]) }
-
-        # & "$PSScriptRoot\Set-NTFSPermissions.ps1" @fileShareInputObject
-        if ($PSCmdlet.ShouldProcess("NTFS Permissions on the share", "Set")) {
-            & "$PSScriptRoot\Set-NTFSPermissions.ps1" @fileShareInputObject
-            LogInfo("Permissions set")
+            & "$PSScriptRoot\Set-OneDrive.ps1" $config.profileContainerKeys
+            LogInfo("OneDrive configured")
         }
     }
 }
