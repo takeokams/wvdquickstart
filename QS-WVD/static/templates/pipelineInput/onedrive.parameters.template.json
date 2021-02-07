@@ -6,10 +6,26 @@
             "profileContainerKeys": [
                 # to be edited for OneDrive RegEdits
                 {
-                    "Name": "Enabled",
+                    "Name": "SilentAccountConfig",
                     "Type": "DWORD",
                     "Value": "1"
                 },
+                 {
+                    "Name": "FilesOnDemandEnabled",
+                    "Type": "DWORD",
+                    "Value": "1"
+                },
+                {
+                    "Name": "KFMSilentOptInWithNotification",
+                    "Type": "DWORD",
+                    "Value": "1"
+                },
+                {
+                    "Name": "KFMSilentOptIn",
+                    "Type": "DWORD",
+                    "Value": "[tennantID]"
+                },
+                
                 {
                     "Name": "VHDLocations",
                     "Type": "MultiString",
