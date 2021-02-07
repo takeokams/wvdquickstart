@@ -4,7 +4,6 @@
             "installOneDrive": true,
             "configureOneDrive": true,
             "profileContainerKeys": [
-                # to be edited for OneDrive RegEdits
                 {
                     "Name": "SilentAccountConfig",
                     "Type": "DWORD",
@@ -22,14 +21,8 @@
                 },
                 {
                     "Name": "KFMSilentOptIn",
-                    "Type": "DWORD",
-                    "Value": "[tennantID]"
-                },
-                
-                {
-                    "Name": "VHDLocations",
                     "Type": "MultiString",
-                    "Value": "\\\\[profilesStorageAccountName].file.core.windows.net\\[profilesShareName]"
+                    "Value": "[tenantId]"
                 }
             ],
             "fileShareName": "[profilesShareName]",
