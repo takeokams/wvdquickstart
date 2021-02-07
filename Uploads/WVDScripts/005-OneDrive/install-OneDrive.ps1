@@ -100,32 +100,20 @@ function Set-Logger {
 
 Set-Logger "C:\WindowsAzure\Logs\Plugins\Microsoft.Compute.CustomScriptExtension\executionLog\FSLogix" # inside "executionCustomScriptExtension_$scriptName_$date.log"
 
-#####################
-# 1 Extract FSLogix #
-#####################
-LogInfo("######################")
-LogInfo("# 1. Extract FSLogix #")
-LogInfo("######################")
-
-$FSLogixArchivePath = Join-Path $PSScriptRoot "FSLogixApp.zip"
-
-LogInfo("Expanding Archive $FSLogixArchivePath into $PSScriptRoot")
-Expand-Archive -Path $FSLogixArchivePath -DestinationPath $PSScriptRoot
-LogInfo("Archive expanded")
 
 #####################
-# 2 Install FSLogix #
+# 1 Install OneDrive #
 #####################
 LogInfo("######################")
-LogInfo("# 2. Install FSLogix #")
+LogInfo("# 1. Install OneDrive #")
 LogInfo("######################")
 
 # To get switches run cmd with '$path /?'
 
-$Switches = "/passive /norestart"
-$ExecutableName = "x64\Release\FSLogixAppsSetup.exe"
-$FSLogixExePath = Join-Path $PSScriptRoot $ExecutableName
+$Switches = "/allusers"
+$ExecutableName = "C:\Windows\SysWOW64\OneDriveSetup.exe"
+$OneDriveExePath = Join-Path $PSScriptRoot $ExecutableName
 
-LogInfo("Trigger installation of file '$FSLogixExePath' with switches '$switches'")
-$Installer = Start-Process -FilePath $FSLogixExePath -ArgumentList $Switches -Wait -PassThru
+LogInfo("Trigger installation of file '$OneDriveExePath' with switches '$switches'")
+$Installer = Start-Process -FilePath $OneDriveExePath -ArgumentList $Switches -Wait -PassThru
 LogInfo("The exit code is $($Installer.ExitCode)")
