@@ -1,7 +1,7 @@
 #Requires -RunAsAdministrator
 
 <#
-    Install and configure FSLogix
+    Install and configure OneDrive
 
     CSE based on instructions at:
         https://docs.microsoft.com/en-us/azure/virtual-desktop/create-host-pools-user-profile#configure-the-fslogix-profile-container
@@ -114,7 +114,7 @@ function Set-Logger {
 Set-Logger "C:\WindowsAzure\Logs\Plugins\Microsoft.Compute.CustomScriptExtension\executionLog\FSLogix" # inside "executionCustomScriptExtension_$scriptName_$date.log"
 
 #####################
-# Configure FSLogix #
+# Configure OneDrive #
 #####################
 
 Write-Verbose "In function count: $($testArr.Count)"
@@ -123,8 +123,8 @@ $testArr
 LogInfo("###############################")
 LogInfo("# 1. Retrieve Registry Values #")
 LogInfo("###############################")
-$fsLogixRegPath = "HKLM:\software\FSLogix"
-$expectedReqKey = 'Profiles'
+$fsLogixRegPath = "HKLM:\software\Microsoft"
+$expectedReqKey = 'OneDrie'
 $expectedfsLogixRegKeyPath = Join-Path $fsLogixRegPath $expectedReqKey
 
 LogInfo("############################")
